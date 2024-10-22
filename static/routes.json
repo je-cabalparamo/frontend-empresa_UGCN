@@ -2,9 +2,9 @@
   "routes" : [],
   "platformErrorOverrides" : [
     {
-      "errorType": "NotFound",
-      "serve": "/200.html",
-      "status": 200
+      "errorType" : "NotFound",
+      "serve" : "/200.html",
+      "status" : 200
     }
   ]
 }
