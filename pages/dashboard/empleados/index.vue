@@ -1,11 +1,13 @@
 <template>
-  <div>
-    <h1>Hola A Todos</h1>
-  </div>
+  <empleados-crud />
 </template>
 
 <script>
+import empleadosCrud from '~/components/ui/empleadosCrud.vue'
 export default {
+  components: {
+    empleadosCrud
+  },
   layout: 'dashboard',
   middleware: 'auth'
 }

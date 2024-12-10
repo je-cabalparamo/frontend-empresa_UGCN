@@ -1,5 +1,12 @@
 <template>
   <v-app>
+    <show-alert
+      v-if="showAlert"
+      :type="type"
+      :color="color"
+      :mensaje="mensaje"
+      class="show-alert"
+    />
     <v-main>
       <Nuxt />
     </v-main>
@@ -7,8 +14,9 @@
       permanent
       absolute
       right
+      app
     >
-      <template v-slot:prepend>
+      <template #prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
             <img src="https://randomuser.me/api/portraits/lego/6.jpg">
@@ -31,7 +39,9 @@
           :to="item.path"
         >
           <v-list-item-icon>
-            <v-icon color="blue">{{ item.icon }}</v-icon>
+            <v-icon color="blue">
+              {{ item.icon }}
+            </v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -44,6 +54,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -55,10 +66,37 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapState({
+      showAlert: state => state.showAlert,
+      type: state => state.type,
+      color: state => state.color,
+      mensaje: state => state.mensaje
+    })
+  },
+  watch: {
+    showAlert () {
+      console.log('@@@ cambio => ', this.showAlert)
+      if (this.showAlert) {
+        setTimeout(() => {
+          this.$store.commit('setShowAlert', false)
+        }, 3000)
+      }
+    },
+    type () {},
+    color () {},
+    mensaje () {}
   }
 }
 </script>
 
 <style scoped>
-
+.show-alert {
+  position: fixed;
+  left: 10px;
+  z-index: 100;
+  top: 10px;
+  min-width: 350px;
+}
 </style>

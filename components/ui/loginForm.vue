@@ -1,7 +1,7 @@
 <template>
   <v-card flat elevation="0" width="400" color="#444444">
     <v-card-title>
-      <p class="text-center" color="#d4af37" style="100%;">
+      <p class="text-center" style="color: #d4af37; width: 100%;">
         I am All of me
       </p>
     </v-card-title>
@@ -72,6 +72,9 @@ export default {
           data: this.form
         })
         console.log('@@ res => ', res)
+        if (res && res.data && res.data.token) {
+          this.$router.push('/dashboard')
+        }
       } catch (error) {
         this.errorMessage = error
       }
